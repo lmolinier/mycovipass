@@ -5,12 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:mescovipass/certificate.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-
-import 'package:mescovipass/qrscanner.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import 'certificate.dart';
+import 'qrscanner.dart';
 import 'store.dart';
 
 class AddMenu extends StatefulWidget {

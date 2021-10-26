@@ -1,9 +1,8 @@
 import 'package:eudcc/eudcc.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:mescovipass/add.dart';
 
-import 'store.dart';
+import 'add.dart';
 
 void main() {
   runApp(const MyApp());

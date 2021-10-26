@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "release tag"
+        required: true
+      track:
+        description: "playstore track"
+        default: internal
+
+name: Google Playstore
+
+env:
+  appname: mycovipass
+  appkey: eu.molinier.mycovipass
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download from release
+      uses: dsaltares/fetch-gh-release-asset@master
+      with:
+        version: "tags/${{ github.event.inputs.tag }}"
+        file: "${{ env.appname }}-${{ github.event.inputs.tag }}.aab"
+        target: "release.aab"
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Deploy to Playstore
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_KEY }}
+        packageName: ${{ env.appkey }}
+        releaseFiles: release.aab
+        track: ${{ github.event.inputs.track }}
+        status: "completed"
