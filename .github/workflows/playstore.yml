@@ -11,8 +11,8 @@ on:
 name: Google Playstore
 
 env:
-  appname: mycovipass
-  appkey: eu.molinier.mycovipass
+  appname: myqrwallet
+  appkey: eu.molinier.myqrwallet
 
 jobs:
   download:
