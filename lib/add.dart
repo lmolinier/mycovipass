@@ -21,7 +21,7 @@ class AddMenu extends StatefulWidget {
 class AddMenuState extends State<AddMenu> {
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
-  final Store store = kIsWeb ? TempStore() : LocalStore("mycovipass");
+  final Store store = kIsWeb ? TempStore() : LocalStore("myqrwallet");
 
   int _current = 0;
   final CarouselController _controller = CarouselController();

@@ -1,4 +1,4 @@
-# mescovipass
+# myqrwallet
 
 A new Flutter project.
 

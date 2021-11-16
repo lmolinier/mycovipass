@@ -1,5 +1,5 @@
-name: mycovipass
-description: My EU Covid Pass is a simple application to display your european COVID certificates.
+name: myqrwallet
+description: This is a simple wallet that displays QR Codes.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
