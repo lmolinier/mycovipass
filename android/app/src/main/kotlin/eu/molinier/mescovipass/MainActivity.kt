@@ -1,4 +1,4 @@
-package eu.molinier.mescovipass
+package eu.molinier.myqrwallet
 
 import io.flutter.embedding.android.FlutterActivity
 

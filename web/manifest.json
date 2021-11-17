@@ -1,11 +1,11 @@
 {
-    "name": "mescovipass",
-    "short_name": "mescovipass",
+    "name": "myqrwallet",
+    "short_name": "myqrwallet",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A simple wallet for storing QR Codes.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="eu.molinier.mescovipass">
+    package="eu.molinier.myqrwallet">
    <application
-        android:label="mescovipass"
+        android:label="My QR Wallet"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
