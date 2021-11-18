@@ -47,12 +47,14 @@ class CertificateWidgetState extends State<CertificateWidget> {
                                   "") +
                               " " +
                               cert.certificates.single.holder.firstName,
-                          style: const TextStyle(fontSize: 22)),
+                          style: const TextStyle(
+                              fontSize: 22, color: Colors.black)),
                     )),
                 RichText(
                     text: TextSpan(
                         text: cert.certificates.single.holder.firstNameICAO9303,
-                        style: const TextStyle(fontSize: 10))),
+                        style:
+                            const TextStyle(fontSize: 10, color: Colors.grey))),
               ]),
             ),
             QrImage(
@@ -72,18 +74,23 @@ class CertificateWidgetState extends State<CertificateWidget> {
                           text: TextSpan(
                               text: "delivered: ",
                               style: const TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.bold),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
                               children: [
                             TextSpan(
                               text: cert.issuedAt.toString(),
                               style: const TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.normal),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black),
                             )
                           ])),
                       RichText(
                           text: TextSpan(
                               text: cert.issuedAt.toString(),
-                              style: const TextStyle(fontSize: 10))),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.black))),
                     ])),
                 collapsed: Row(),
                 expanded: Row(
