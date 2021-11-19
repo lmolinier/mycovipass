@@ -52,7 +52,11 @@ class CertificateWidgetState extends State<CertificateWidget> {
                     )),
                 RichText(
                     text: TextSpan(
-                        text: cert.certificates.single.holder.firstNameICAO9303,
+                        text: (cert.certificates.single.holder
+                                    .givenNameICAO9303 ??
+                                "") +
+                            " " +
+                            cert.certificates.single.holder.firstNameICAO9303,
                         style:
                             const TextStyle(fontSize: 10, color: Colors.grey))),
               ]),
@@ -88,7 +92,7 @@ class CertificateWidgetState extends State<CertificateWidget> {
                           ])),
                       RichText(
                           text: TextSpan(
-                              text: cert.issuedAt.toString(),
+                              text: cert.expiresAt.toString(),
                               style: const TextStyle(
                                   fontSize: 10, color: Colors.black))),
                     ])),
