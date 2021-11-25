@@ -1,4 +1,3 @@
-import 'package:eudcc/eudcc.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:myqrwallet/controller.dart';
 import 'package:myqrwallet/plugins/eudcc/qrcode.dart';

@@ -4,13 +4,13 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:myqrwallet/qrcodes/reader.dart';
+
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:file_picker/file_picker.dart';
 
 import 'carousel.dart';
-import 'controller.dart';
-import 'qrscanner.dart';
+import 'qrcodes/scanner.dart';
+import 'qrcodes/reader.dart';
 
 class PopMenu extends StatefulWidget {
   final Widget body;

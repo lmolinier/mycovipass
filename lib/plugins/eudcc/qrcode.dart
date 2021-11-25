@@ -1,7 +1,8 @@
 import 'package:eudcc/eudcc.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:myqrwallet/carousel.dart';
-import 'package:myqrwallet/controller.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../carousel.dart';
+import '../../controller.dart';
 
 import 'widget.dart';
 

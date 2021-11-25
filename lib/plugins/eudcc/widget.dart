@@ -2,9 +2,11 @@ import 'package:eudcc/eudcc.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:myqrwallet/carousel.dart';
-import 'package:myqrwallet/plugins/eudcc/utils.dart';
+
 import 'package:qr_flutter/qr_flutter.dart';
+
+import '../../carousel.dart';
+import 'utils.dart';
 
 class EUDCCWidget extends QrCodeWidget {
   const EUDCCWidget(this.cert, {Key? key, OnDeletedCallback? onDeleted})

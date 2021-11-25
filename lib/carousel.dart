@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:myqrwallet/controller.dart';
-import 'package:myqrwallet/popmenu.dart';
+
+import 'controller.dart';
+import 'popmenu.dart';
 
 typedef OnDeletedCallback = void Function();
 typedef OnAddedCallback = void Function(String qrcode);

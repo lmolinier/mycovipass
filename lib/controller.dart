@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:myqrwallet/plugins/eudcc/qrcode.dart';
-import 'package:myqrwallet/store.dart';
 
+import 'plugins/eudcc/qrcode.dart';
+import 'store.dart';
 import 'carousel.dart';
 
 abstract class QrCode {

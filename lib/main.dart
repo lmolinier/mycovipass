@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myqrwallet/controller.dart';
 
+import 'controller.dart';
 import 'carousel.dart';
 
 Future<void> main() async {
