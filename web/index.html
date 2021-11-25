@@ -28,6 +28,13 @@
 
   <!-- QR Scanner -->
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.3.1/dist/jsQR.min.js"></script>
+
+  <!-- Link to pdf.js library -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+  <script type="text/javascript">
+    // Link to worker for pdf.js library
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js";
+  </script>
   
   <title>My QR Wallet</title>
   <link rel="manifest" href="manifest.json">

@@ -2,21 +2,26 @@ import 'package:eudcc/eudcc.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:myqrwallet/carousel.dart';
+import 'package:myqrwallet/plugins/eudcc/utils.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class CertificateWidget extends StatefulWidget {
-  const CertificateWidget(this.cert, {Key? key}) : super(key: key);
+class EUDCCWidget extends QrCodeWidget {
+  const EUDCCWidget(this.cert, {Key? key, OnDeletedCallback? onDeleted})
+      : super(key: key, onDeleted: onDeleted);
 
   final EUDigitalCovidCertificate cert;
 
   @override
-  State<CertificateWidget> createState() => CertificateWidgetState();
+  State<EUDCCWidget> createState() => EUDCCWidgetState();
 }
 
-class CertificateWidgetState extends State<CertificateWidget> {
+class EUDCCWidgetState extends State<EUDCCWidget> {
   @override
   Widget build(BuildContext context) {
-    final cert = widget.cert;
+    final cert = widget.cert.certificates.single;
+    final holder = cert.holder;
+    final eeudc = widget.cert;
     return Container(
       //width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.all(5),
@@ -41,28 +46,18 @@ class CertificateWidgetState extends State<CertificateWidget> {
                 ),
                 Padding(
                     padding: const EdgeInsets.all(5),
-                    child: RichText(
-                      text: TextSpan(
-                          text: (cert.certificates.single.holder.givenName ??
-                                  "") +
-                              " " +
-                              cert.certificates.single.holder.firstName,
-                          style: const TextStyle(
-                              fontSize: 22, color: Colors.black)),
+                    child: Text(
+                      prettyPrintName(holder.firstName, holder.givenName),
+                      style: const TextStyle(fontSize: 22, color: Colors.black),
                     )),
-                RichText(
-                    text: TextSpan(
-                        text: (cert.certificates.single.holder
-                                    .givenNameICAO9303 ??
-                                "") +
-                            " " +
-                            cert.certificates.single.holder.firstNameICAO9303,
-                        style:
-                            const TextStyle(fontSize: 10, color: Colors.grey))),
+                Text(
+                    prettyPrintName(
+                        holder.firstNameICAO9303, holder.givenNameICAO9303),
+                    style: const TextStyle(fontSize: 10, color: Colors.grey)),
               ]),
             ),
             QrImage(
-              data: cert.qr!,
+              data: eeudc.qr!,
               version: QrVersions.auto,
               //size: MediaQuery.of(context).size.width,
             ),
@@ -83,7 +78,7 @@ class CertificateWidgetState extends State<CertificateWidget> {
                                   color: Colors.black),
                               children: [
                             TextSpan(
-                              text: cert.issuedAt.toString(),
+                              text: eeudc.issuedAt.toString(),
                               style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
@@ -92,14 +87,22 @@ class CertificateWidgetState extends State<CertificateWidget> {
                           ])),
                       RichText(
                           text: TextSpan(
-                              text: cert.expiresAt.toString(),
+                              text: eeudc.expiresAt.toString(),
                               style: const TextStyle(
                                   fontSize: 10, color: Colors.black))),
                     ])),
                 collapsed: Row(),
                 expanded: Row(
                   children: [
-                    const Text("plop"),
+                    IconButton(
+                        icon: const Icon(
+                          Icons.delete_forever,
+                          color: Colors.red,
+                        ),
+                        tooltip: "Delete",
+                        onPressed: () {
+                          widget.onDeleted!();
+                        }),
                   ],
                 )),
           ],
