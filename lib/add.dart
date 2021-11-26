@@ -47,7 +47,8 @@ class PopMenuState extends State<PopMenu> {
       },
       child: Scaffold(
         floatingActionButton: SpeedDial(
-          animatedIcon: AnimatedIcons.menu_close,
+          activeIcon: Icons.close,
+          icon: Icons.add,
           openCloseDial: isDialOpen,
           backgroundColor: Colors.redAccent,
           overlayColor: Colors.grey,

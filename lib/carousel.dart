@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'controller.dart';
-import 'popmenu.dart';
+import 'add.dart';
 
 typedef OnDeletedCallback = void Function();
 typedef OnAddedCallback = void Function(String qrcode);
@@ -73,6 +73,8 @@ class CarouselState extends State<Carousel> {
               carouselController: _controller,
               options: CarouselOptions(
                   //enlargeCenterPage: true,
+                  viewportFraction: 0.9,
+                  enableInfiniteScroll: false,
                   height: MediaQuery.of(context).size.height,
                   onPageChanged: (index, reason) {
                     setState(() {
