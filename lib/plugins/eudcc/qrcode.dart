@@ -1,20 +1,21 @@
 import 'package:eudcc/eudcc.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../carousel.dart';
+import '../../qrcodes/model.dart';
 import '../../controller.dart';
 
 import 'widget.dart';
 
-class EUDCCQrCode implements QrCode {
+class EUDCCQrCode extends QrCode {
+  @override
+  String get type => "eudcc";
+
   final EUDigitalCovidCertificate cert;
 
   EUDCCQrCode(this.cert);
 
-  @override
-  String toQrCode() {
-    return cert.qr ?? "unknown";
-  }
+  EUDCCQrCode.fromJson(Map<String, dynamic> json)
+      : cert = EUDigitalCovidCertificateFactory().fromQrCode(json["qr"])!;
 
   static QrCode? fromQrCode(String qr) {
     var cert = EUDigitalCovidCertificateFactory().fromQrCode(qr);
@@ -24,5 +25,10 @@ class EUDCCQrCode implements QrCode {
   @override
   Widget widget({OnDeletedCallback? onDeleted}) {
     return EUDCCWidget(cert, onDeleted: onDeleted);
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {"qr": cert.qr, ...super.toJson()};
   }
 }

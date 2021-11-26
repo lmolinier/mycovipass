@@ -8,7 +8,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:file_picker/file_picker.dart';
 
-import 'carousel.dart';
+import 'controller.dart';
 import 'qrcodes/scanner.dart';
 import 'qrcodes/reader.dart';
 

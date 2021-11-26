@@ -1,26 +1,26 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 
-import 'plugins/eudcc/qrcode.dart';
-import 'store.dart';
-import 'carousel.dart';
+import 'persistence/store.dart';
+import 'qrcodes/model.dart';
 
-abstract class QrCode {
-  String toQrCode();
-  Widget widget({OnDeletedCallback? onDeleted});
-}
+typedef OnDeletedCallback = void Function();
+typedef OnAddedCallback = void Function(String qrcode);
 
 class Controller {
-  final Store store = kIsWeb ? TempStore() : LocalStore("myqrwallet");
+  //final Store store = kIsWeb ? TempStore() : LocalStore("myqrwallet");
+  final Store store = SecureStore();
 
-  Future<bool> get ready {
-    return store.ready;
+  Future<bool> get ready async {
+    var r = await store.ready;
+    if (!kIsWeb) {
+      return r;
+    }
+    await store.loadDefaultTestValuesIfEmpty();
+    return r;
   }
 
-  QrCode? create(String qrcode) {
-    return [
-      EUDCCQrCode.fromQrCode,
-    ].map((fn) => fn(qrcode)).first;
+  QrCode create(String qrcode) {
+    return QrCode.fromQrCode(qrcode);
   }
 
   Future<bool> add(QrCode qr) async {
@@ -28,25 +28,25 @@ class Controller {
   }
 
   Future<bool> addFromQr(String qrcode) async {
-    var qr = create(qrcode);
-    return qr != null ? await store.add(qr) : false;
+    var item = create(qrcode);
+    return await store.add(item);
   }
 
-  Future<bool> remove(QrCode qr) async {
-    return store.remove(qr);
+  Future<bool> remove(QrCode item) async {
+    return store.remove(item);
   }
 
   Iterable<T> map<T>(T Function(QrCode) toElement) {
-    return store.certs.map(toElement);
+    return store.items.map(toElement);
   }
 
   Map<int, QrCode> asMap() {
-    return store.certs.asMap();
+    return store.items.asMap();
   }
 
   QrCode? get(int idx) {
     if (idx <= store.length) {
-      return store.certs[idx];
+      return store.items[idx];
     }
     return null;
   }

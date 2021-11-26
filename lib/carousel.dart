@@ -4,9 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import 'controller.dart';
 import 'add.dart';
-
-typedef OnDeletedCallback = void Function();
-typedef OnAddedCallback = void Function(String qrcode);
+import 'qrcodes/model.dart';
 
 abstract class QrCodeWidget extends StatefulWidget {
   final OnDeletedCallback? onDeleted;
@@ -82,7 +80,7 @@ class CarouselState extends State<Carousel> {
                     });
                   }),
               items: widget.controller
-                  .map((QrCode cert) => cert.widget(
+                  .map((QrCode it) => it.widget(
                       onDeleted: () => {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Row(
@@ -94,7 +92,7 @@ class CarouselState extends State<Carousel> {
                                 ),
                                 action: SnackBarAction(
                                   label: 'delete',
-                                  onPressed: () => onDeleted(cert),
+                                  onPressed: () => onDeleted(it),
                                 )))
                           }))
                   .toList(),

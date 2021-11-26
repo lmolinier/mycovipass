@@ -6,6 +6,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../controller.dart';
 import '../../carousel.dart';
 import 'utils.dart';
 
