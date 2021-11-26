@@ -22,7 +22,10 @@ class SecureStore extends Store {
   }
 
   @override
-  Future<bool> get ready async => true;
+  Future<bool> get ready async {
+    await load();
+    return true;
+  }
 
   @override
   Future<void> save() async {
