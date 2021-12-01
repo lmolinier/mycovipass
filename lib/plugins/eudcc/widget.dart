@@ -6,6 +6,8 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../controller.dart';
 import '../../carousel.dart';
 import 'utils.dart';
@@ -78,7 +80,8 @@ class EUDCCWidgetState extends State<EUDCCWidget> {
                             SpeedDialChild(
                                 child: const Icon(Icons.delete_forever,
                                     color: Colors.redAccent),
-                                label: 'Delete',
+                                label:
+                                    AppLocalizations.of(context)!.actionDelete,
                                 onTap: () {
                                   widget.onDeleted!();
                                 }),
@@ -119,7 +122,8 @@ class EUDCCWidgetState extends State<EUDCCWidget> {
                         child: Column(children: [
                           RichText(
                               text: TextSpan(
-                                  text: "delivered: ",
+                                  text: AppLocalizations.of(context)!
+                                      .eudccDelivered,
                                   style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,

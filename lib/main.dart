@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'controller.dart';
 import 'carousel.dart';
 
@@ -43,11 +45,13 @@ class _AppState extends State<App> {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
             appBar: AppBar(
               // Here we take the value from the MyHomePage object that was created by
               // the App.build method, and use it to set our appbar title.
-              title: const Text('Home'),
+              title: Text(AppLocalizations.of(context)?.homepage ?? "Home"),
             ),
             body: FutureBuilder(
                 future: widget.controller.ready,

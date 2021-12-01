@@ -1,0 +1,11 @@
+{
+    "homepage": "Démarrage",
+    "errorCreate": "Error de création du QR Code",
+    "errorDelete": "Erreur de suppression",
+    "confirmDeletion": "Êtes-vous sûr de vouloir supprimer ?",
+    "actionScan": "Scan",
+    "actionImage": "Image",
+    "actionDelete": "Suprression",
+    "errorDecode": "Erreur de décodage du QR Code",
+    "eudccDelivered": "Délivré le : "
+}

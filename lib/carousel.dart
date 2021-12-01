@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'controller.dart';
 import 'add.dart';
 import 'qrcodes/model.dart';
@@ -33,7 +35,7 @@ class CarouselState extends State<Carousel> {
     widget.controller.addFromQr(qrcode).then((res) {
       if (!res) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("cannot save the certificate")),
+          SnackBar(content: Text(AppLocalizations.of(context)!.errorCreate)),
         );
       }
       setState(() {});
@@ -46,8 +48,8 @@ class CarouselState extends State<Carousel> {
         setState(() => {});
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Cannot delete"),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.errorDelete),
           ),
         );
       }
@@ -84,10 +86,11 @@ class CarouselState extends State<Carousel> {
                       onDeleted: () => {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Row(
-                                  children: const [
-                                    Icon(Icons.delete_forever,
+                                  children: [
+                                    const Icon(Icons.delete_forever,
                                         color: Colors.white),
-                                    Text("Please confirm deletion"),
+                                    Text(AppLocalizations.of(context)!
+                                        .confirmDeletion),
                                   ],
                                 ),
                                 action: SnackBarAction(

@@ -8,6 +8,8 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:file_picker/file_picker.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'controller.dart';
 import 'qrcodes/scanner.dart';
 import 'qrcodes/reader.dart';
@@ -59,7 +61,7 @@ class PopMenuState extends State<PopMenu> {
           children: [
             SpeedDialChild(
                 child: const Icon(Icons.qr_code),
-                label: 'Scan',
+                label: AppLocalizations.of(context)!.actionScan,
                 onTap: () {
                   Navigator.push(
                       context,
@@ -79,7 +81,7 @@ class PopMenuState extends State<PopMenu> {
                 }),
             SpeedDialChild(
               child: const Icon(Icons.image),
-              label: "Image",
+              label: AppLocalizations.of(context)!.actionImage,
               onTap: () {
                 FilePicker.platform
                     .pickFiles()
@@ -98,8 +100,9 @@ class PopMenuState extends State<PopMenu> {
                           widget.onAdded!(qrcode);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text("cannot decode QR Code")),
+                            SnackBar(
+                                content: Text(
+                                    AppLocalizations.of(context)!.errorDecode)),
                           );
                         }
                       });

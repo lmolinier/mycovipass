@@ -12,7 +12,8 @@ class QrCode {
         "type": type,
       };
 
-  Widget widget({OnDeletedCallback? onDeleted}) => Text("Unknown type $type");
+  Widget widget({OnDeletedCallback? onDeleted}) =>
+      throw Exception("Unknown type $type");
 
   QrCode();
 

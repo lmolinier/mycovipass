@@ -1,0 +1,46 @@
+{
+    "homepage": "Home",
+    "@homepage": {
+        "description": "Name of the homepage."
+    },
+
+    "errorCreate": "Cannot create the QR",
+    "@errorCreate": {
+        "description": "Error message used when the creation of a new QR has failed."
+    },
+
+    "errorDelete": "Cannot delete",
+    "@errorDelete": {
+        "description": "Error message used when the deletion of a QR has failed."
+    },
+
+    "confirmDeletion": "Please confirm deletion",
+    "@confirmDeletion": {
+        "description": "Snackbar message to confirm the deletion."
+    },
+
+    "actionScan": "Scan",
+        "@confirmDeletion": {
+        "description": "Create a QR Code from the camera."
+    },
+
+    "actionImage": "Image",
+    "@confirmDeletion": {
+        "description": "Create a QR Code from an image action."
+    },
+    
+    "actionDelete": "Delete",
+    "@actionDelete": {
+        "description": "Delete the current QR Code action."
+    },
+
+    "errorDecode": "cannot decode QR Code",
+    "@errorDecode": {
+        "description": "Error message when scanning a QR failed."
+    },
+       
+    "eudccDelivered": "Delivered: ",
+    "@eudccDelivered": {
+        "description": "Delevered date caption."
+    }
+}
