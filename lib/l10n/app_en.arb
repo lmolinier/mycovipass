@@ -4,6 +4,11 @@
         "description": "Name of the homepage."
     },
 
+    "empty": "To add a QR Code, press on the + button and follow instructions...",
+    "@empty": {
+        "description": "Text displayed when no QR are registered into the app."
+    },
+
     "errorCreate": "Cannot create the QR",
     "@errorCreate": {
         "description": "Error message used when the creation of a new QR has failed."

@@ -1,5 +1,6 @@
 {
     "homepage": "Démarrage",
+    "empty": "Pour ajouter un QR Code, appuyer sur le bouton + et laissez-vous guider...",
     "errorCreate": "Error de création du QR Code",
     "errorDelete": "Erreur de suppression",
     "confirmDeletion": "Êtes-vous sûr de vouloir supprimer ?",

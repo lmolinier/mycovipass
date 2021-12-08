@@ -69,37 +69,43 @@ class CarouselState extends State<Carousel> {
         onAdded: onAdded,
         body: Column(children: <Widget>[
           Expanded(
-            child: CarouselSlider(
-              carouselController: _controller,
-              options: CarouselOptions(
-                  //enlargeCenterPage: true,
-                  viewportFraction: 0.9,
-                  enableInfiniteScroll: false,
-                  height: MediaQuery.of(context).size.height,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
-                  }),
-              items: widget.controller
-                  .map((QrCode it) => it.widget(
-                      onDeleted: () => {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Row(
-                                  children: [
-                                    const Icon(Icons.delete_forever,
-                                        color: Colors.white),
-                                    Text(AppLocalizations.of(context)!
-                                        .confirmDeletion),
-                                  ],
-                                ),
-                                action: SnackBarAction(
-                                  label: 'delete',
-                                  onPressed: () => onDeleted(it),
-                                )))
-                          }))
-                  .toList(),
-            ),
+            child: widget.controller.isEmpty
+                ? Container(
+                    alignment: Alignment.center,
+                    child: Text(AppLocalizations.of(context)!.empty,
+                        style: const TextStyle(color: Colors.grey)))
+                : CarouselSlider(
+                    carouselController: _controller,
+                    options: CarouselOptions(
+                        //enlargeCenterPage: true,
+                        viewportFraction: 0.9,
+                        enableInfiniteScroll: false,
+                        height: MediaQuery.of(context).size.height,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
+                        }),
+                    items: widget.controller
+                        .map((QrCode it) => it.widget(
+                            onDeleted: () => {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                          content: Row(
+                                            children: [
+                                              const Icon(Icons.delete_forever,
+                                                  color: Colors.white),
+                                              Text(AppLocalizations.of(context)!
+                                                  .confirmDeletion),
+                                            ],
+                                          ),
+                                          action: SnackBarAction(
+                                            label: 'delete',
+                                            onPressed: () => onDeleted(it),
+                                          )))
+                                }))
+                        .toList(),
+                  ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

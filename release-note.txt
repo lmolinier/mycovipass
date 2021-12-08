@@ -1,0 +1,6 @@
+<en-US>
+This app is storing digital certificates (Green Pass) only and exclusively on your smartphone. It does not require internet connection to work. This is usefull when you have to store severel certificates for your family for instance: with one click & a slide you can validate all your certificates with ease.
+</en-US>
+<fr-FR>
+Cette application stocke vos certificats européen uniquement sur votre smartphone, et de manière sécurisé. Elle n'a pas besoin d'une connection internet pour fonctionner. Elle est particulièrement utiles si vous devez gérer plusieurs certificats, comme pour une famille par exemple : lancez l'application et avec un "slide", faites validez tous vos pass!
+</fr-FR>

@@ -36,6 +36,10 @@ class Controller {
     return store.remove(item);
   }
 
+  bool get isEmpty {
+    return store.items.isEmpty;
+  }
+
   Iterable<T> map<T>(T Function(QrCode) toElement) {
     return store.items.map(toElement);
   }
