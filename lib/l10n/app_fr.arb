@@ -1,12 +1,22 @@
 {
     "homepage": "Démarrage",
     "empty": "Pour ajouter un QR Code, appuyer sur le bouton + et laissez-vous guider...",
-    "errorCreate": "Error de création du QR Code",
+    "loadingError": "Error de création du QR Code",
+    "loadingFile": "Chargement du fichier",
+    "loadingPdf": "Conversion du fichier PDF",
+    "loadingPng": "Conversion du fichier PNG",
+    "loadingSuccess": "Ajout réussi!",
+
     "errorDelete": "Erreur de suppression",
     "confirmDeletion": "Êtes-vous sûr de vouloir supprimer ?",
     "actionScan": "Scan",
     "actionImage": "Image",
     "actionDelete": "Suprression",
+    "actionChangeAvatar": "Changer l'avatar",
     "errorDecode": "Erreur de décodage du QR Code",
-    "eudccDelivered": "Délivré le : "
+    "eudccDelivered": "Délivré le : ",
+    "selectAvatarTitle": "Choisissez votre avatar",
+    "selectAvatarColor": "Choisissez une couleur",
+    "selectAvatarColorShade": "Choisissez une nuance",
+    "selectedAvatarColorAndShade": "Couleur et nuances choisies"
 }

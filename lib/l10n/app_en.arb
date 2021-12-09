@@ -9,9 +9,29 @@
         "description": "Text displayed when no QR are registered into the app."
     },
 
-    "errorCreate": "Cannot create the QR",
-    "@errorCreate": {
+    "loadingError": "Cannot create the QR",
+    "@loadingError": {
         "description": "Error message used when the creation of a new QR has failed."
+    },
+
+    "loadingFile": "Loading file",
+    "@loadingFile": {
+        "description": "Info message displayed when loading file from storage."
+    },
+
+    "loadingPdf": "Converting PDF file",
+    "@loadingPdf": {
+        "description": "Info message displayed when converting a PDF file."
+    },
+
+    "loadingPng": "Converting PNG file",
+    "@loadingPng": {
+        "description": "Info message displayed when converting a PNG file."
+    },
+
+    "loadingSuccess": "Successfully loaded!",
+    "@loadingSuccess": {
+        "description": "Info message displayed when a new QR Code is loaded."
     },
 
     "errorDelete": "Cannot delete",
@@ -39,6 +59,11 @@
         "description": "Delete the current QR Code action."
     },
 
+    "actionChangeAvatar": "Change avatar",
+    "@actionChangeAvatar": {
+        "description": "Change the avatar associated with the QR Code."
+    },
+
     "errorDecode": "cannot decode QR Code",
     "@errorDecode": {
         "description": "Error message when scanning a QR failed."
@@ -47,5 +72,14 @@
     "eudccDelivered": "Delivered: ",
     "@eudccDelivered": {
         "description": "Delevered date caption."
-    }
+    },
+               
+    "selectAvatarTitle": "Select the avatar",
+    "@selectAvatarTitle": {
+        "description": "Title of the avatar selection page."
+    },
+
+    "selectAvatarColor": "Select background color",
+    "selectAvatarColorShade": "Select color shade",
+    "selectedAvatarColorAndShade": "Selected color and its shades"
 }

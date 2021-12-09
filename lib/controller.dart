@@ -4,10 +4,10 @@ import 'persistence/store.dart';
 import 'qrcodes/model.dart';
 
 typedef OnDeletedCallback = void Function();
+typedef OnUpdatedCallback = void Function();
 typedef OnAddedCallback = void Function(String qrcode);
 
 class Controller {
-  //final Store store = kIsWeb ? TempStore() : LocalStore("myqrwallet");
   final Store store = SecureStore();
 
   Future<bool> get ready async {
@@ -53,5 +53,9 @@ class Controller {
       return store.items[idx];
     }
     return null;
+  }
+
+  Future<void> save() async {
+    await store.save();
   }
 }

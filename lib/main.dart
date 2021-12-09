@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -47,6 +48,7 @@ class _AppState extends State<App> {
         ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        builder: EasyLoading.init(),
         home: Scaffold(
             appBar: AppBar(
               // Here we take the value from the MyHomePage object that was created by

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -10,9 +13,10 @@ import 'qrcodes/model.dart';
 
 abstract class QrCodeWidget extends StatefulWidget {
   final OnDeletedCallback? onDeleted;
+  final OnUpdatedCallback? onUpdated;
   final OnAddedCallback? onAdded;
 
-  const QrCodeWidget({Key? key, this.onDeleted, this.onAdded})
+  const QrCodeWidget({Key? key, this.onDeleted, this.onAdded, this.onUpdated})
       : super(key: key);
 }
 
@@ -31,15 +35,19 @@ class CarouselState extends State<Carousel> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
-  onAdded(String qrcode) {
-    widget.controller.addFromQr(qrcode).then((res) {
+  onAdded(String qrcode) async {
+    try {
+      var res = await widget.controller.addFromQr(qrcode);
       if (!res) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.errorCreate)),
-        );
+        EasyLoading.showError(AppLocalizations.of(context)!.loadingError);
+        return;
       }
+      EasyLoading.showSuccess(AppLocalizations.of(context)!.loadingSuccess);
       setState(() {});
-    });
+    } on Exception catch (_, e) {
+      EasyLoading.showError(AppLocalizations.of(context)!.loadingError);
+      log("cannot create QR Code", stackTrace: e);
+    }
   }
 
   onDeleted(QrCode qr) {
@@ -54,6 +62,10 @@ class CarouselState extends State<Carousel> {
         );
       }
     });
+  }
+
+  onUpdated() async {
+    await widget.controller.save();
   }
 
   @override
@@ -103,7 +115,8 @@ class CarouselState extends State<Carousel> {
                                             label: 'delete',
                                             onPressed: () => onDeleted(it),
                                           )))
-                                }))
+                                },
+                            onUpdated: onUpdated))
                         .toList(),
                   ),
           ),

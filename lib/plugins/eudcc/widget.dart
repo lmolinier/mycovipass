@@ -3,6 +3,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:myqrwallet/plugins/eudcc/qrcode.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -10,13 +11,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../controller.dart';
 import '../../carousel.dart';
+import 'avatar.dart';
 import 'utils.dart';
 
 class EUDCCWidget extends QrCodeWidget {
-  const EUDCCWidget(this.cert, {Key? key, OnDeletedCallback? onDeleted})
-      : super(key: key, onDeleted: onDeleted);
+  const EUDCCWidget(this.qrcode,
+      {Key? key, OnDeletedCallback? onDeleted, OnUpdatedCallback? onUpdated})
+      : super(key: key, onDeleted: onDeleted, onUpdated: onUpdated);
 
-  final EUDigitalCovidCertificate cert;
+  final EUDCCQrCode qrcode;
 
   @override
   State<EUDCCWidget> createState() => EUDCCWidgetState();
@@ -25,11 +28,21 @@ class EUDCCWidget extends QrCodeWidget {
 class EUDCCWidgetState extends State<EUDCCWidget> {
   ValueNotifier<bool> isMenuOpen = ValueNotifier(false);
 
+  selectAvatar() {
+    Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AvatarSelector(qrcode: widget.qrcode)))
+        .then((value) => setState(() {
+              widget.onUpdated!();
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
-    final cert = widget.cert.certificates.single;
+    final cert = widget.qrcode.cert.certificates.single;
     final holder = cert.holder;
-    final eeudc = widget.cert;
+    final eeudc = widget.qrcode.cert;
     return Container(
         //width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.all(5),
@@ -85,12 +98,16 @@ class EUDCCWidgetState extends State<EUDCCWidget> {
                                 onTap: () {
                                   widget.onDeleted!();
                                 }),
+                            SpeedDialChild(
+                                child: const Icon(Icons.emoji_emotions),
+                                label: AppLocalizations.of(context)!
+                                    .actionChangeAvatar,
+                                onTap: selectAvatar),
                           ],
                         )),
-                    const CircleAvatar(
-                      child: Image(image: AssetImage('assets/avatar_man.png')),
-                      backgroundColor: Colors.transparent,
-                      radius: 40,
+                    GestureDetector(
+                      onLongPress: selectAvatar,
+                      child: widget.qrcode.avatar(),
                     ),
                     Padding(
                         padding: const EdgeInsets.all(5),

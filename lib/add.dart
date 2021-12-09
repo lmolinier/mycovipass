@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -86,6 +87,8 @@ class PopMenuState extends State<PopMenu> {
                 FilePicker.platform
                     .pickFiles()
                     .then((FilePickerResult? result) {
+                  EasyLoading.showInfo(
+                      AppLocalizations.of(context)!.loadingFile);
                   if (result != null) {
                     for (var f in result.files) {
                       Uint8List b;
@@ -95,20 +98,20 @@ class PopMenuState extends State<PopMenu> {
                         b = f.bytes!;
                       }
 
-                      QrReader(f.extension, b).scan().then((String? qrcode) {
+                      QrReader(f.extension, b)
+                          .scan(context)
+                          .then((String? qrcode) {
                         if (qrcode != null) {
                           widget.onAdded!(qrcode);
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text(
-                                    AppLocalizations.of(context)!.errorDecode)),
-                          );
+                          EasyLoading.showError(
+                              AppLocalizations.of(context)!.errorDecode);
                         }
                       });
                     }
                   } else {
                     // User canceled the picker
+                    EasyLoading.dismiss();
                   }
                 });
               },
