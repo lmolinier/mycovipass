@@ -28,6 +28,11 @@
     "@loadingPng": {
         "description": "Info message displayed when converting a PNG file."
     },
+    
+    "loadingJpg": "Converting JPG file",
+    "@loadingJpg": {
+        "description": "Info message displayed when converting a JPG file."
+    },
 
     "loadingSuccess": "Successfully loaded!",
     "@loadingSuccess": {
