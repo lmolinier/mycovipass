@@ -53,7 +53,8 @@ class _AppState extends State<App> {
             appBar: AppBar(
               // Here we take the value from the MyHomePage object that was created by
               // the App.build method, and use it to set our appbar title.
-              title: Text(AppLocalizations.of(context)?.homepage ?? "Home"),
+              title: Text(
+                  AppLocalizations.of(context)?.homepage ?? "My QR Wallet"),
             ),
             body: FutureBuilder(
                 future: widget.controller.ready,

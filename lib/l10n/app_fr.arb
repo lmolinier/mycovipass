@@ -1,5 +1,5 @@
 {
-    "homepage": "Démarrage",
+    "homepage": "My QR Wallet",
     "empty": "Pour ajouter un QR Code, appuyer sur le bouton + et laissez-vous guider...",
     "loadingError": "Error de création du QR Code",
     "loadingFile": "Chargement du fichier",
@@ -15,6 +15,7 @@
     "actionChangeAvatar": "Changer l'avatar",
     "errorDecode": "Erreur de décodage du QR Code",
     "eudccDelivered": "Délivré le : ",
+    "scanCodeTitle": "Scannez un QR Code",
     "selectAvatarTitle": "Choisissez votre avatar",
     "selectAvatarColor": "Choisissez une couleur",
     "selectAvatarColorShade": "Choisissez une nuance",

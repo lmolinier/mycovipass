@@ -1,5 +1,5 @@
 {
-    "homepage": "Home",
+    "homepage": "My QR Wallet",
     "@homepage": {
         "description": "Name of the homepage."
     },
@@ -71,9 +71,14 @@
        
     "eudccDelivered": "Delivered: ",
     "@eudccDelivered": {
-        "description": "Delevered date caption."
+        "description": "Delivered date caption."
     },
                
+    "scanCodeTitle": "Scan a QR Code",
+    "@scanCodeTitle": {
+        "description": "Title of the scanner page."
+    },
+
     "selectAvatarTitle": "Select the avatar",
     "@selectAvatarTitle": {
         "description": "Title of the avatar selection page."
