@@ -22,7 +22,7 @@ class QrReader {
         var page = await doc.getPage(1);
         // Ensure the page is big enough for the QR Code to be readable
         var png =
-            await page.render(width: 2 * page.width, height: 2 * page.height);
+            await page.render(width: 4 * page.width, height: 4 * page.height);
         image = img.decodePng(png!.bytes);
         break;
       case "png":
