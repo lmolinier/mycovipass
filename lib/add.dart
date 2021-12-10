@@ -87,8 +87,8 @@ class PopMenuState extends State<PopMenu> {
                 FilePicker.platform
                     .pickFiles()
                     .then((FilePickerResult? result) {
-                  EasyLoading.showInfo(
-                      AppLocalizations.of(context)!.loadingFile);
+                  EasyLoading.show(
+                      status: AppLocalizations.of(context)!.loadingFile);
                   if (result != null) {
                     for (var f in result.files) {
                       Uint8List b;

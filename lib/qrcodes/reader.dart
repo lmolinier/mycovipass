@@ -17,7 +17,7 @@ class QrReader {
     img.Image? image;
     switch (extension) {
       case "pdf":
-        EasyLoading.showInfo(AppLocalizations.of(context)!.loadingPdf);
+        EasyLoading.show(status: AppLocalizations.of(context)!.loadingPdf);
         var doc = await PdfDocument.openData(buffer);
         var page = await doc.getPage(1);
         // Ensure the page is big enough for the QR Code to be readable
@@ -26,8 +26,13 @@ class QrReader {
         image = img.decodePng(png!.bytes);
         break;
       case "png":
-        EasyLoading.showInfo(AppLocalizations.of(context)!.loadingPng);
+        EasyLoading.show(status: AppLocalizations.of(context)!.loadingPng);
         image = img.decodePng(buffer);
+        break;
+      case "jpg":
+      case "jpeg":
+        EasyLoading.show(status: AppLocalizations.of(context)!.loadingJpg);
+        image = img.decodeJpg(buffer);
         break;
       default:
         return null;
@@ -37,7 +42,7 @@ class QrReader {
       return null;
     }
 
-    EasyLoading.showInfo("Detecting QR Code in image");
+    EasyLoading.show(status: "Detecting QR Code in image");
     LuminanceSource source = RGBLuminanceSource(image.width, image.height,
         image.getBytes(format: img.Format.abgr).buffer.asInt32List());
     var bitmap = BinaryBitmap(HybridBinarizer(source));

@@ -5,6 +5,8 @@
     "loadingFile": "Chargement du fichier",
     "loadingPdf": "Conversion du fichier PDF",
     "loadingPng": "Conversion du fichier PNG",
+    "loadingJpg": "Conversion du fichier JPG",
+
     "loadingSuccess": "Ajout réussi!",
 
     "errorDelete": "Erreur de suppression",
