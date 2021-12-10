@@ -24,6 +24,10 @@ class QRScannerView extends StatefulWidget {
 class _QRScannerViewState extends State<QRScannerView> {
   QRViewController? controller;
 
+  // note: the uniqueness of this key is key :)
+  // otherwise the controller is rebuilt on each setState
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
   @override
@@ -41,14 +45,22 @@ class _QRScannerViewState extends State<QRScannerView> {
     super.dispose();
   }
 
-  _callFinish(Barcode code) {
-    widget.onFinish!(code);
-    controller!.dispose();
+  void _onQRViewCreated(QRViewController controller) {
+    setState(() {
+      this.controller = controller;
+    });
+    controller.scannedDataStream.listen((scanData) {
+      widget.onFinish!(scanData);
+      controller.dispose();
+    });
   }
 
-  _callFailed(String reason) {
-    widget.onFailed!(reason);
-    controller!.dispose();
+  void _onPermissionSet(QRViewController ctrl, bool p) {
+    log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
+    if (!p) {
+      widget.onFailed!("permission failed");
+      controller!.dispose();
+    }
   }
 
   @override
@@ -59,7 +71,7 @@ class _QRScannerViewState extends State<QRScannerView> {
         ),
         body: Stack(children: [
           QRView(
-            key: GlobalKey(debugLabel: 'QR'),
+            key: qrKey,
             overlay: QrScannerOverlayShape(
                 borderColor: Colors.red,
                 borderRadius: 10,
@@ -69,137 +81,64 @@ class _QRScannerViewState extends State<QRScannerView> {
                         MediaQuery.of(context).size.height < 400)
                     ? 150.0
                     : 300.0),
-            onPermissionSet: (QRViewController controller, bool p) {
-              if (!p) {
-                _callFailed('permission denied');
-              }
-            },
-            onQRViewCreated: (QRViewController controller) {
-              this.controller = controller;
-              controller.scannedDataStream.listen((Barcode code) {
-                _callFinish(code);
-              });
-            },
+            onPermissionSet: _onPermissionSet,
+            onQRViewCreated: _onQRViewCreated,
           ),
-          Row(children: [
-            Expanded(
-                child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: IconButton(
-                      onPressed: () async {
-                        await controller?.toggleFlash();
-                        setState(() {});
-                      },
-                      icon: FutureBuilder(
-                        future: controller?.getFlashStatus(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState !=
-                              ConnectionState.done) {
-                            return const Icon(Icons.flash_on,
-                                color: Colors.grey);
-                          }
-                          return Icon(snapshot.data == true
-                              ? Icons.flash_on
-                              : Icons.flash_off);
+          Padding(
+              padding: const EdgeInsets.all(24),
+              child: Row(children: [
+                if (controller != null)
+                  Expanded(
+                      child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        onPressed: () async {
+                          await controller?.toggleFlash();
+                          setState(() {});
                         },
-                      )),
-                ),
-              ],
-            ))
-          ]),
+                        icon: FutureBuilder(
+                            future: controller?.getFlashStatus(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState !=
+                                  ConnectionState.done) {
+                                return const Icon(Icons.flash_off,
+                                    color: Colors.grey);
+                              }
+                              return Icon(
+                                  snapshot.data == true
+                                      ? Icons.flash_off
+                                      : Icons.flash_on,
+                                  color: Colors.red);
+                            }),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await controller?.flipCamera();
+                          setState(() {});
+                        },
+                        icon: FutureBuilder(
+                            future: controller?.getCameraInfo(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState !=
+                                  ConnectionState.done) {
+                                return const Icon(Icons.camera_front,
+                                    color: Colors.grey);
+                              }
+                              return Icon(
+                                  (snapshot.data as CameraFacing) ==
+                                          CameraFacing.back
+                                      ? Icons.camera_front
+                                      : Icons.camera_rear,
+                                  color: Colors.red);
+                            }),
+                      ),
+                    ],
+                  )),
+              ])),
         ]));
-    /*
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  if (result != null)
-                    Text(
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  else
-                    Text('Scan a code'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.toggleFlash();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getFlashStatus(),
-                              builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
-                              },
-                            )),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.flipCamera();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getCameraInfo(),
-                              builder: (context, snapshot) {
-                                if (snapshot.data != null) {
-                                  return Text(
-                                      'Camera facing ${describeEnum(snapshot.data!)}');
-                                } else {
-                                  return Text('loading');
-                                }
-                              },
-                            )),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await controller?.pauseCamera();
-                          },
-                          child: Text('pause', style: TextStyle(fontSize: 20)),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await controller?.resumeCamera();
-                          },
-                          child: Text('resume', style: TextStyle(fontSize: 20)),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );*/
   }
 }
 
