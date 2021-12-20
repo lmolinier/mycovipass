@@ -26,7 +26,7 @@ class EUDCCQrCode extends QrCode {
         cert = EUDigitalCovidCertificateFactory().fromQrCode(json["qr"])!;
 
   static QrCode? fromQrCode(String qr) {
-    var cert = EUDigitalCovidCertificateFactory().fromQrCode(qr);
+    var cert = EUDigitalCovidCertificateFactory().fromQrCodeOrUri(qr);
     return cert != null ? EUDCCQrCode(cert) : null;
   }
 

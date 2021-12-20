@@ -41,7 +41,7 @@ dependencies:
   flutter_speed_dial: ^4.4.0+2
   qr_code_scanner: ^0.5.2
   json_annotation: ^4.3.0
-  eudcc: ^0.0.1
+  eudcc: ^0.0.5
   localstorage: ^4.0.0+1
   carousel_slider: ^4.0.0
   qr_flutter: ^4.0.0
