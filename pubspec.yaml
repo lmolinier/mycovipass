@@ -54,6 +54,7 @@ dependencies:
   flutter_easyloading: ^3.0.3
   item_selector: ^0.2.0
   flex_color_picker: ^2.2.0
+  html_unescape: ^2.0.0
 
 dev_dependencies:
   flutter_test:
